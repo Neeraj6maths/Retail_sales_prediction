@@ -58,24 +58,29 @@ The dataset conatains general information of each store.
 - No null values were present in Rossmann dataset.  
 - Null values were present in sales dataset.
 
+To remove null values in sales dataset I have imputed them with mode of the respective column.
+
 
 ### (3) Converting columns to appropriate data types
 
 - Changed datatype of `Date` to date type. 
 
 ### (5) Creating new columns
-- Created new column `sales per customer` from `date` column.
-- Created new column `day of month` from `date` column.
+- Created new columns `Day`,`Week` and `Month` from date column.
+
 
 ### (6) Feature encoding
-- Used One hot encoding to transform categorical feature - `Seasons`.
-- Used Label encoding to transform categorical features - `Holiday`, `Functional Day`.
+- Used One hot encoding to transform categorical feature - `StoreType`, `Assortment`, `PromoInterval`.
+- Used Label encoding to transform categorical features - `StateHoliday`.
 
 ### (7) Handling skewness
-- Used square root transformation to reduce skewness of skewed features.
+- Used square root transformation and logarithmic transformation to reduce skewness of skewed features.
+
+### (8) Removing outliers
+- Checked for outliers in sales column using IQR method and dropped them.
 
 ### (8) Standardization of features
-- Used `Z-score` for normalization of features.This step scales data into a uniform format that would utilize the data in a better way while performing fitting and applying different algorithms to it. 
+- Used `Min-Max Scaler` for normalization of features.This step scales data into a uniform format that would utilize the data in a better way while performing fitting and applying different algorithms to it. 
 
 ## Exploratory Data Analysis
 
@@ -87,50 +92,25 @@ Mainly performed using Matplotlib and Seaborn library and the following graph an
   - Line Plot.
   - Heatmap.
   - Box Plot
+  - Violin plot
              
 
 
-- 
-
-### Feature Selection
-
-Feature Selection is crucial step before model training as it improves the performance of model and also to reduce multicollinearity in dataset.
-Since tree based algorithms are immune to multicollinearity that's why in this project feature selection is performed only before training `Linear', `Lasso`, `Ridge` and `Elastic Net` regression.
-
-```
-
-         Feature selection increases the predictive power of machine learning algorithms by selecting the most important variables 
-         and eliminating redundant and irrelevant features. I removed all the multicollinear features from the dataset prior training 
-         the model. For removing multicollinearity I used Vif and heatmap.
-         
-         (a) Correlation Matrix: 
-                 (i)   Found that `Dew point temperature` and `temperature` are highly collinear.
-                 
-                 
-          (b) VIF:  Variation Inflation Factor is another way of measuring multicollinearity. A high VIF indicates that the associated independent 
-          variable is highly collinear with the other variables in the model.
-                 (i) `Dew point temperature`, `Humidity` and `Visibility` found to have high Vif Values.
-                 
-                 
-           Therefore, `Dew point temperature`, `Humidity` and `Visibility` were dropped.
-```
-
-### Features for model building
-
-For `Decision Tree Regressor` and `Random Forest` we have not removed highly correlated features. Therefore features while training these algorithms are:
-
-```
- - 
-```
-
+- Sales were almost consistent in each year.
+- Sales increased slighlty at the end of the year.
+- Sales were slightly higher on state holidays as compared to non holiday.
+- School holidays didnt impacted sales of stores.
+- Promotions increased sales of stores significantly.
+- Store type 'b' has higher sales as compared to other types of stores.
+- Store with extra assortment level has higher sales as compared to basic and extended level.
 
 
 ## Model Building
 
 
-Since we have to predict the count of rented bikes, so this is a regression problem. Based on the problem statement which is basically to predict the demand of rented bikes for each hour I decided to develop predictive models using following algorithms and haev compared ther performance.
+Since we have to predict the sales of the stores, so this is a regression problem. Based on the problem statement  I decided to develop predictive models using following algorithms and have compared there performance.
 ```
-- Decision Tree Regressor
+
 - Random Forest
 - Linear Regression
 - Lasso
@@ -150,12 +130,19 @@ Following necessary steps have been employed for better model performance.
 
 ### Evaluation metrics
 
-To evaluate the models I have used MSE( Mean Square error) and Adjusted R2-Score.
+To evaluate the models I have used MSE and R2-Score.
 
 
 ## Conclusion
 
 ```
+                 (i)   Random forest performed best as compared to other models with
+                         R2-Score for test dataset = 0.97
+                         
+                 (ii)  Linear Regression also performed fairly well.
+                         R2-Score for test dataset = 0.83
+                         MSE for test dataset      = 1150556.094
+                          
                  
            
 

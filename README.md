@@ -1,4 +1,4 @@
-# Rented bikes demand prediction (Regression)
+# Retail Sales prediction (Regression)
 
 
 ## Objective

@@ -98,10 +98,10 @@ Mainly performed using Matplotlib and Seaborn library and the following graph an
 
 - Sales were almost consistent in each year.
 - Sales increased slighlty at the end of the year.
-- Sales were slightly higher on state holidays as compared to non holiday.
+- Sales decreased on state holidays as compared to non holiday.
 - School holidays didnt impacted sales of stores.
 - Promotions increased sales of stores significantly.
-- Store type 'b' has higher sales as compared to other types of stores.
+- Store type 'a' has higher sales as compared to other types of stores.
 - Store with extra assortment level has higher sales as compared to basic and extended level.
 
 
